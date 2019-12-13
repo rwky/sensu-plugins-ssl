@@ -6,6 +6,25 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ## [Unreleased]
 - `check-ssl-hsts-preloadable.rb`: Fixed testing warnings for if a domain can be HSTS preloaded (@rwky)
 
+## [2.0.1] - 2018-05-30
+### Fixed
+- `check-ssl-qualys.rb`: Fixed typo and removed timeout `-t` short option replacing it with `--timeout` as per previous changelog. `-t` conflicts with the short option for `--time-between`
+- Fixed typo in changelog
+
+## [2.0.0] - 2018-03-27
+### Breaking Changes
+- `check-ssl-qualys.rb`: when you submit a request with caching enabled it will return back a response including an eta key. Rather than sleeping for some arbitrary number of time we now use this key when its greater than `--time-between` to wait before attempting the next attempt to query. If it is lower or not present we fall back to `--time-between` (@majormoses)
+- `check-ssl-qualys.rb`: new `--timeout` parameter to short circuit slow apis (@majormoses)
+
+### Changed
+- `check-ssl-qualys.rb`: updated `--api-url` to default to `v3` but remains backwards compatible (@jhoblitt) (@majormoses)
+
+### Added
+`check-ssl-qualys.rb`: option `--debug` to enable debug logging (@majormoses)
+
+### Fixed
+- `check-ssl-hsts-preloadable.rb`: Fixed testing warnings for if a domain can be HSTS preloaded (@rwky)
+
 ## [1.5.0] - 2017-09-26
 ### Added
 - Ruby 2.4.1 testing
@@ -92,7 +111,9 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/1.5.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/2.0.1...HEAD
+[2.0.1]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/2.0.0...2.0.1
+[2.0.0]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/1.5.0...2.0.0
 [1.5.0]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/1.3.1...1.4.0
 [1.3.1]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/1.3.0...1.3.1
